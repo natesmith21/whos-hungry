@@ -73,6 +73,39 @@ describe("GET /users", function () {
         ],
       });
     });
+    it('gets a specified user', async function() {
+      const resp = await request(app)
+        .get("/users/u1")
+      expect(resp.body).toEqual({
+        user:
+        {
+          username: "u1",
+          firstName: "U1F",
+          lastName: "U1L",
+          email: "user1@user.com",
+          isAdmin: false,
+        }
+      })
+    })
+})
+
+describe('PATCH /users/:username', function() {
+  it('updates a specified user', async function() {
+    const resp = await request(app)
+      .patch('/users/u1')
+      .send({
+        firstName: 'New'
+      })
+    expect(resp.body).toEqual({
+      user: {
+        username: "u1",
+        firstName: "New",
+        lastName: "U1L",
+        email: "user1@user.com",
+        isAdmin: false,
+      }
+    })
+  })
 })
 
 
