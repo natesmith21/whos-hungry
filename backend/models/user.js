@@ -115,6 +115,22 @@ class User {
         delete user.password;
         return user;
     }
+
+    static async remove(username) {
+        let result = await db.query(
+            `DELETE 
+            FROM users
+            WHERE username = $1
+            returning username`,
+            [username]
+        );
+
+        const user = result.rows[0];
+
+        if(!user) throw new NotFoundError(`No user: ${username}`);
+
+        return user;
+    }
 }
 
 module.exports = User;

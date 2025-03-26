@@ -108,4 +108,10 @@ describe('PATCH /users/:username', function() {
   })
 })
 
-
+describe('DELETE /users/:username', function() {
+  it('deletes a specified user', async function () {
+    const resp = await request(app)
+    .delete(`/users/u1`)
+    expect(resp.body).toEqual({ deleted: "u1" });
+  });
+})
