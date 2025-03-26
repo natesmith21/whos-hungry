@@ -61,7 +61,15 @@ router.patch('/:username', async (req, res, next) => {
       } catch (err) {
         return next(err);
       }
-})
+});
 
+router.delete('/:username', async (req, res, next) => {
+    try {
+        const user = await User.remove(req.params.username);
+        return res.json({ deleted: user.username });
+    } catch (e) {
+        return next(e);
+    }
+});
 
 module.exports = router;
