@@ -4,8 +4,14 @@
   "description": "connection to spoonacular API + my db",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest -i",
     "dev": "nodemon server.js"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "config.js"
+    ]
   },
   "author": "Nate Smith",
   "license": "ISC",
