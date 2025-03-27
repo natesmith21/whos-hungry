@@ -2,14 +2,15 @@ import React, {useContext} from "react";
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "reactstrap";
 import UserContext from "../UserContext";
+import './NavBar.css';
 
 const NavBar = ( { logout } ) => {
   const { currentUser } = useContext(UserContext);
     return (
-        <div>
+        <>
         <Navbar expand="md">
           <NavLink className='home' exact to="/">
-            Jobly
+            Who's Hungry?
           </NavLink>
           <Nav className="ml-auto" navbar>
             {(currentUser) ? (
@@ -30,7 +31,7 @@ const NavBar = ( { logout } ) => {
             }
           </Nav>
         </Navbar>
-      </div>
+      </>
     );
 }
 
