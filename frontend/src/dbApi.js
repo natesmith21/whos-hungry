@@ -27,7 +27,6 @@ class dbApi {
     
       // Individual API routes
     
-    
     /** register */
       static async makeUser(data){
         let res = await this.request(`auth/register`, data, 'post');
@@ -48,6 +47,12 @@ class dbApi {
       static async updateCurrentUser(username, data){
         let res = await this.request(`users/${username}`, data, 'patch')
         return res;
+      }
+
+      /** get random recipie */
+      static async getRandomRecipe(){
+        let res = await this.request('recipes/random');
+        return res.recipe;
       }
 }
 
