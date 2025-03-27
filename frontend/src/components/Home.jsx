@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import UserContext from "../UserContext";
 
 const Home = () => {
-
+    const { currentUser } = useContext(UserContext)
     return (
         <>
-            <h1>Home Page</h1>
+            <h1>{(currentUser) ? `Welcome back ${currentUser.firstName}!` : `Who's Hungry?`}</h1>
         </>
     )
 }

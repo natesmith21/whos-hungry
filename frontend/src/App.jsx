@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import dbApi from './dbApi';
 import Routes from './components/Routes';
 import UserContext from './UserContext';
 import useLocalStorage from './hooks/useLocalStorage';
+import { jwtDecode } from 'jwt-decode';
 import LoadingPage from './components/LoadingPage';
+import NavBar from './components/NavBar';
+import { Nav } from 'reactstrap';
 
 const TOKEN_STORAGE = 'user-token';
 
@@ -52,15 +55,16 @@ function App() {
   if (!userLoaded) return <LoadingPage />;
 
   return (
-    <>
+    <div className='App'>
       <BrowserRouter>
       <UserContext.Provider value = {{ currentUser, setCurrentUser }}>
+        <NavBar logout= { logout }/>
       <main>
           <Routes login={login} register={register} />
         </main>
       </UserContext.Provider>
       </BrowserRouter>
-    </>
+    </div>
   )
 }
 
