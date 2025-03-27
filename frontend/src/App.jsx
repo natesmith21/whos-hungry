@@ -3,11 +3,41 @@ import './App.css';
 import { BrowserRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import dbApi from './dbApi';
 import Routes from './components/Routes';
+import UserContext from './UserContext';
+import useLocalStorage from './hooks/useLocalStorage';
+import LoadingPage from './components/LoadingPage';
 
+const TOKEN_STORAGE = 'user-token';
 
 function App() {
-  const [token, setToken] = useState();
+  const [token, setToken] = useLocalStorage(TOKEN_STORAGE);
+  const [userLoaded, setUserLoaded] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
+  useEffect(function loadUser() {
+
+    async function getCurrentUser() {
+      if (token){
+        try {
+          let { username } = jwtDecode(token);
+          dbApi.token = token;
+          let currentUser = await dbApi.getCurrentUser(username);
+          setCurrentUser(currentUser);
+        } catch (e) {
+          console.error('error:', e)
+          setCurrentUser(null);
+        }
+      }
+      setUserLoaded(true);
+    }
+    setUserLoaded(false);
+    getCurrentUser()
+  }, [token]);
+
+  const logout = () => {
+    setCurrentUser(null);
+    setToken(null);
+  };
 
   const login = async (data) => {
     const { token } = await dbApi.getToken(data);
@@ -19,12 +49,16 @@ function App() {
     console.log(token);
   }
 
+  if (!userLoaded) return <LoadingPage />;
+
   return (
     <>
       <BrowserRouter>
-        <main>
+      <UserContext.Provider value = {{ currentUser, setCurrentUser }}>
+      <main>
           <Routes login={login} register={register} />
         </main>
+      </UserContext.Provider>
       </BrowserRouter>
     </>
   )
