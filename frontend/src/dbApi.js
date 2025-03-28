@@ -49,9 +49,15 @@ class dbApi {
         return res;
       }
 
-      /** get random recipie */
+      /** get random recipe */
       static async getRandomRecipe(){
         let res = await this.request('recipes/random');
+        return res.recipe;
+      }
+
+      /**get a specifc recipe */
+      static async getRecipe(id){
+        let res = await this.request(`recipes/${id}`);
         return res.recipe;
       }
 }

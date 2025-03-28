@@ -31,10 +31,10 @@ class Spoonacular {
         return res.recipes;
       }
 
-      // static async getRandom() {
-      //   let res = await axios.get(`${BASE_URL}/recipes/random?apiKey=${API_KEY}`);
-      //   return res.data;
-      // }
+      static async getRecipe(id){
+        let res = await this.request(`recipes/${id}/information`)
+        return res;
+      }
 }
 
 module.exports = Spoonacular;
