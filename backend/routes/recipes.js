@@ -15,4 +15,13 @@ router.get('/random', async (req, res, next) => {
     }
 })
 
+router.get('/:id', async (req, res, next) => {
+    try {
+        const recipe = await Spoonacular.getRecipe(req.params.id);
+        return res.json({ recipe });
+    } catch (e) {
+        return next(e);
+    }
+});
+
 module.exports = router;

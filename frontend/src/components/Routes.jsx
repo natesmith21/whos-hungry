@@ -4,6 +4,7 @@ import Login from "./auth/Login";
 import Home from "./Home";
 import Register from "./auth/Register";
 import UserProfile from "./UserProfile";
+import Recipe from "./Recipe";
 
 const Routes = ( { login, register } ) => {
 
@@ -20,6 +21,9 @@ const Routes = ( { login, register } ) => {
             </Route>
             <Route exact path='/profile'>
                 <UserProfile />
+            </Route>
+            <Route exact path='/recipes/:id'>
+                <Recipe />
             </Route>
         </Switch>
     )
