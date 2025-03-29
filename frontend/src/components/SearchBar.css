@@ -1,0 +1,12 @@
+.searchBar{
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchBar button {
+    margin: 1rem;
+}
+
+.searchBar input {
+    margin: 1rem;
+}

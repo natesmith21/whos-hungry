@@ -24,4 +24,13 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
+router.get('/search/:terms', async (req, res, next) => {
+    try {
+        const recipes = await Spoonacular.searchRecipes(req.params.terms);
+        return res.json({ recipes });
+    } catch (e) {
+        return next(e);
+    }
+});
+
 module.exports = router;
