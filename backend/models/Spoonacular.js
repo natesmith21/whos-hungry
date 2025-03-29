@@ -35,6 +35,17 @@ class Spoonacular {
         let res = await this.request(`recipes/${id}/information`)
         return res;
       }
+
+      static async searchRecipes(searchTerms, params) {
+        const filters = [];
+        for (let k in params) filters.push(`${k}=${params.k}`);
+
+        let res = await this.request(`recipes/complexSearch?query=${searchTerms}`)
+        return res;
+      }
 }
 
 module.exports = Spoonacular;
+
+
+// &${filters.join('&')}

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
-import dbApi from "../dbApi";
-import { cleanHTML } from '../utils';
+import dbApi from "../../dbApi";
+import { cleanHTML } from '../../utils';
 
 const Recipe = () => {
     const { id } = useParams();
