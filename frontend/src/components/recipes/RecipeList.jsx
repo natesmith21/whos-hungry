@@ -9,9 +9,10 @@ const RecipesList = () => {
 
     const search = async (q) => {
         let rec = await dbApi.searchRecipes(q);
-        // console.log(rec.recipes.results);
         setRecipes(rec.recipes.results);
     }
+
+    
 
     if (!recipes) return (
         <section>

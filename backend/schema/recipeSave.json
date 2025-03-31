@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "properties": {
+      "username": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 30
+      },
+      "recipeId": {
+        "type": "integer"
+      },
+      "recipeFolder": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 30
+      },
+      "made_it": {
+        "type": "boolean"
+      },
+      "rating": {
+        "type": "integer",
+        "min": 1,
+        "max": 5
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "username",
+      "recipeId"
+    ]
+  }

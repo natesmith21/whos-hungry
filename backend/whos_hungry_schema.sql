@@ -1,6 +1,6 @@
 CREATE TABLE users (
-  id UUID PRIMARY KEY,
-  username VARCHAR(25) UNIQUE,
+  id UUID UNIQUE,
+  username VARCHAR(25) PRIMARY KEY,
   password TEXT NOT NULL,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
@@ -8,3 +8,13 @@ CREATE TABLE users (
     CHECK (position('@' IN email) > 1),
   is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+CREATE TABLE saved_recipes (
+  PRIMARY KEY (username, recipe_id),
+  username VARCHAR(25) 
+    REFERENCES users ON DELETE CASCADE,
+  recipe_id INTEGER, 
+  recipe_folder TEXT, 
+  made_it BOOLEAN NOT NULL DEFAULT FALSE,
+  rating INTEGER CHECK (rating > 0 and rating < 6)
+)

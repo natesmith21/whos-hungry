@@ -4,7 +4,7 @@ const db = require('../db');
 const bcrypt = require('bcrypt');
 const { BCRYPT_WORK_FACTOR } = require('../config');
 const { v4: uuidv4 } = require('uuid');
-const { NotFoundError } = require('../expressError');
+const { NotFoundError, UnauthorizedError } = require('../expressError');
 const { sqlForPartialUpdate } = require('../helpers/sql');
 
 
@@ -17,7 +17,7 @@ class User {
             FROM users
             WHERE username = $1`,
             [username]
-        );
+        );  
 
         const user = result.rows[0];
 
@@ -26,6 +26,8 @@ class User {
             if (isValid) {
                 delete user.password;
                 return user;
+            } else {
+                throw new UnauthorizedError('Password Incorrect');
             }
         }
     }
@@ -150,6 +152,52 @@ class User {
         if(!user) throw new NotFoundError(`No user: ${username}`);
 
         return user;
+    }
+
+
+    /** Recipe Box  */
+
+    static async getSavedRecipes(user_id) {
+        let result = await db.query(
+            `SELECT username,
+                    recipe_id as "recipeId",
+                    recipe_folder as "recipeFolder",
+                    made_it as "madeRecipe",
+                    rating
+            FROM saved_recipes
+            WHERE username = $1`, 
+            [user_id]);
+        
+        if (!result) throw new NotFoundError('No Saved Recipes');
+
+        const saved_recipes = result.rows;
+
+        return saved_recipes;
+    } 
+
+    static async postSavedRecipe({username, recipeId, recipeFolder}){
+        const dupeCheck = await db.query(
+            `SELECT recipe_id
+            FROM saved_recipes
+            WHERE username = $1
+            AND recipe_id = $2`,
+         [username, recipeId],
+        );
+
+        if (dupeCheck.rows[0]) {
+            throw new BadRequestError(`You've already saved this recipe - see it <a>here</a>`);
+        }
+
+        let result = await db.query(
+            `INSERT INTO saved_recipes
+            (username, recipe_id, recipe_folder)
+            VALUES ($1, $2, $3)
+            RETURNING username, recipe_id AS "recipeID"`, 
+            [username,recipeId, recipeFolder]
+        );
+
+        const saved = result.rows[0];
+        return saved;
     }
 }
 

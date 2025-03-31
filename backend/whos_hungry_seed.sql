@@ -7,3 +7,8 @@ VALUES ( '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
          'test@email.com',
          TRUE
         );
+
+INSERT INTO saved_recipes (username, recipe_id, recipe_folder, made_it, rating)
+VALUES ('testuser', 660185, 'folder1', true, 3),
+        ('testuser', 655822, 'folder1', false, null);
+
