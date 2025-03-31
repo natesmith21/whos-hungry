@@ -5,8 +5,7 @@ import dbApi from "../dbApi";
 import SearchBar from './SearchBar';
 
 const Home = () => {
-    const [recipe, setRecipe] = useState();
-
+    const navigate = useNavigate();
     // useEffect(function randomRecipe() {
 
     //     async function getRandRecipie() {
@@ -20,6 +19,14 @@ const Home = () => {
     //     getRandRecipie()
     // }, []);
 
+    // console.log(recipe);
+
+    const search = async (q) => {
+        let results = await dbApi.searchRecipes(q);
+        // console.log(results);
+
+        navigate("/recipes", {state: {results}});
+    }
 
     const randRecipe = async () => {
         let res = await dbApi.getRandomRecipe();
@@ -30,7 +37,7 @@ const Home = () => {
     return (
         <>
             <h1>{(currentUser) ? `Welcome back ${currentUser.firstName}!` : `Who's Hungry?`}</h1>
-            <SearchBar />
+            <SearchBar searchFor={search} />
             <button onClick={randRecipe}>Get Random</button>
         </>
     )
