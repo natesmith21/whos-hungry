@@ -6,6 +6,7 @@ import { cleanHTML } from '../../utils';
 const Recipe = () => {
     const { id } = useParams();
     const [recipe, setRecipe] = useState(null);
+    const [saved, setSaved] = useState();
 
     useEffect(() => {
         async function getRecipe() {
@@ -13,6 +14,11 @@ const Recipe = () => {
         }
         getRecipe()
     }, [id]);
+
+    const save = async (recipeId, {username, recipeFolder=null}) => {
+        let saved = await dbApi.saveRecipe(recipeId, {username, recipeId, recipeFolder})
+    }
+
 
     if (!recipe) return (
         <div className="LoadingSpinner">
@@ -42,6 +48,7 @@ const Recipe = () => {
                     <li key={step.number}>{step.step}</li>
                 ))}
             </ol>
+            <button onClick={save}>Save Recipe</button>
         </section>
     )
 

@@ -6,6 +6,7 @@ import dbApi from "../dbApi";
 
 const UserProfile = () => {
     const { currentUser, setCurrentUser } = useContext(UserContext);
+    const {savedRecipes, setSavedRecipes} = useState();
 
     const START_FORM = {
         username: currentUser.username,
@@ -23,12 +24,18 @@ const UserProfile = () => {
         }));
       };
 
-
       const submitUpdate = evt => {
         evt.preventDefault();
         const {username, ...data} = formData;
         dbApi.updateCurrentUser(username, data) 
       };
+
+      useEffect(() => {
+        async function getSaved() {
+            setSavedRecipes(await dbApi.getSavedRecipes(currentUser.username));
+        }
+        getSaved()
+      }, [currentUser])
 
     return (
     <section>
@@ -48,18 +55,6 @@ const UserProfile = () => {
                     readOnly
                 >
                 </Input>
-            {/* <Label htmlFor="password">
-                    Password
-                </Label>
-                <Input
-                    onChange={handleChange}
-                    value={formData.password}
-                    id="password"
-                    name="password"
-                    placeholder="password"
-                    type="password"
-                >
-                </Input> */}
                 <Label htmlFor="firstName">
                     First Name
                 </Label>
@@ -99,6 +94,11 @@ const UserProfile = () => {
             </FormGroup>
             <Button >Update</Button>
         </Form>
+        <ul>
+            {savedRecipes.saved.map(recipe => (
+                <li key={recipe.recipeId}>{recipe.recipeId}</li>
+            ))}
+        </ul>
     </section>
     )
 }

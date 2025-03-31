@@ -65,6 +65,18 @@ class dbApi {
         let res = await this.request(`recipes/search/${encodeURIComponent(term)}`);
         return res;
       }
+
+      /**save a recipe to a user */
+      static async saveRecipe(recipeId, data) {
+        let res = await this.request(`recipes/${recipeId}/save`, data, 'post');
+        return res;
+      }
+
+      /**get a user's saved recipes */
+      static async getSavedRecipes(username) {
+        let res = await this.request(`users/${username}/saved`);
+        return res.saved;
+      }
 }
 
 export default dbApi;

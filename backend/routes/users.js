@@ -73,4 +73,17 @@ router.delete('/:username', ensureCorrectUserOrAdmin, async (req, res, next) => 
     }
 });
 
+
+/**get a users saved recipes */
+router.get('/:username/saved', async (req, res, next) => {
+    try {
+        const saved = await User.getSavedRecipes(req.params.username);
+        return res.json({ saved });
+    } catch (e) {
+        return next(e);
+    }
+})
+
+
+
 module.exports = router;
