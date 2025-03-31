@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { useParams } from "react-router-dom";
 import dbApi from "../../dbApi";
 import { cleanHTML } from '../../utils';
+import UserContext from "../../UserContext";
 
 const Recipe = () => {
     const { id } = useParams();
     const [recipe, setRecipe] = useState(null);
-    const [saved, setSaved] = useState();
+    const { currentUser, setCurrentUser } = useContext(UserContext);
 
     useEffect(() => {
         async function getRecipe() {
@@ -15,8 +16,14 @@ const Recipe = () => {
         getRecipe()
     }, [id]);
 
-    const save = async (recipeId, {username, recipeFolder=null}) => {
-        let saved = await dbApi.saveRecipe(recipeId, {username, recipeId, recipeFolder})
+    const save = async (e) => {
+        e.preventDefault();
+        const user = currentUser.username;
+        const recipeToSave = recipe.id;
+        let recipeFolder;
+        
+        let recipes = await dbApi.saveRecipe(recipeToSave, {username : user, recipeId : recipeToSave, recipeFolder});
+        console.log(recipes);
     }
 
 
