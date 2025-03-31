@@ -1,12 +1,14 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import UserContext from "../UserContext";
 import dbApi from "../dbApi";
+import LoadingPage from '../components/LoadingPage';
 
 
 const UserProfile = () => {
     const { currentUser, setCurrentUser } = useContext(UserContext);
-    const {savedRecipes, setSavedRecipes} = useState();
+    const [savedRecipes, setSavedRecipes] = useState();
+    const [userLoaded, setUserLoaded] = useState();
 
     const START_FORM = {
         username: currentUser.username,
@@ -15,6 +17,7 @@ const UserProfile = () => {
         email: currentUser.email
     };
     const [formData, setFormData] = useState(START_FORM);
+
 
     const handleChange = evt => {
         const { name, value } = evt.target;
@@ -31,11 +34,15 @@ const UserProfile = () => {
       };
 
       useEffect(() => {
-        async function getSaved() {
-            setSavedRecipes(await dbApi.getSavedRecipes(currentUser.username));
+        const getSaved = async () => {
+            const userRecipes = await dbApi.getSavedRecipes(currentUser.username);
+            setSavedRecipes(userRecipes);
+            setUserLoaded(true);
         }
         getSaved()
       }, [currentUser])
+
+      if (!userLoaded) return <LoadingPage />;
 
     return (
     <section>
@@ -94,11 +101,12 @@ const UserProfile = () => {
             </FormGroup>
             <Button >Update</Button>
         </Form>
+        <h3>Saved Recipes</h3>
         <ul>
-            {savedRecipes.saved.map(recipe => (
+            {savedRecipes.map(recipe => (
                 <li key={recipe.recipeId}>{recipe.recipeId}</li>
             ))}
-        </ul>
+         </ul>
     </section>
     )
 }
