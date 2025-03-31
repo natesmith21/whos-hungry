@@ -9,7 +9,7 @@ const NavBar = ( { logout } ) => {
     return (
         <>
         <Navbar expand="md">
-          <NavLink className='home' exact to="/">
+          <NavLink className='home' to="/">
             Who's Hungry?
           </NavLink>
           <Nav className="ml-auto" navbar>
@@ -19,7 +19,7 @@ const NavBar = ( { logout } ) => {
                 <NavLink to="/profile">Profile</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink to="/" activeClassName='none' onClick={logout}>Logout</NavLink>
+                <NavLink to="/" onClick={logout}>Logout</NavLink>
               </NavItem>
               </>
             ) :
