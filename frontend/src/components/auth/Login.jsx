@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import { Link, useHistory }from 'react-router-dom';
+import { Link, useNavigate }from 'react-router-dom';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 
 const Login = ( {login} ) => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: "",
         password: ""
@@ -18,15 +18,15 @@ const Login = ( {login} ) => {
       };
 
 
-      const submitLogin = async evt => {
-        evt.preventDefault();
-        let res = await login(formData);
-        if (res.success) {
-            history.push('/');
-        } else {
-            console.error(res.errors);
-        }
-      };
+    //   const submitLogin = async evt => {
+    //     evt.preventDefault();
+    //     let res = await login(formData);
+    //     if (res.success) {
+    //         history.push('/');
+    //     } else {
+    //         console.error(res.errors);
+    //     }
+    //   };
 
     return (
     <section>
