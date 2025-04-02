@@ -8,28 +8,26 @@ import UserContext from "../../UserContext";
 const RecipesList = () => {
     const location = useLocation();
     const { currentUser } = useContext(UserContext);
-    const [recipes, setRecipes] = useState([]);
+    const [recipes, setRecipes] = useState();
+    const [term, setTerm] = useState();
 
-
+    // console.log(setSearchTerm);
     // is there a better way to do this search? should I clear location.state once I'm done with it? does it need to be in the dep. array for the useEffect?
     if (location.state) {
         useEffect(() => {
-            setRecipes(location.state.results.recipes.results);
+            setRecipes(location.state.results.recipes);
         }, [location.state]);
         // window.history.replaceState({}, '');
     }
 
-    const search = async (q) => {
-        let rec = await dbApi.searchRecipes(q);
-        setRecipes(rec.recipes.results);
+    const search = async (q, offset=0) => {
+        setTerm(q)
+        let rec = await dbApi.searchRecipes(q, {offset});
+        setRecipes(rec.recipes);
     }
 
-    // const save = async (id) => {
-    //     const user = currentUser.username;
-    //     const recipeToSave = id;
-    //     let recipeFolder;
-        
-    //     let recipes = await dbApi.saveRecipe(recipeToSave, {username : user, recipeId : recipeToSave, recipeFolder});
+    // const next = async (q, offset=0) => {
+    //     search(term, recipes.number);
     // }
 
     if (!recipes) return (
@@ -42,8 +40,9 @@ const RecipesList = () => {
         <section>
             <SearchBar searchFor={search} />
             <div className="col-md-10 offset-md-1" >
-            {recipes.map(r => <RecipeCard key={r.id} recipe={r} />)}
+            {recipes.results.map(r => <RecipeCard key={r.id} recipe={r} />)}
             </div>
+            {(recipes.totalResults > (recipes.number + recipes.offset)) && <button >Next</button> }
         </section>
     )
     
