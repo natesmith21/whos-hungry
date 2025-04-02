@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import dbApi from "../../dbApi";
 import { cleanHTML } from '../../utils';
 import UserContext from "../../UserContext";
+import { Container, Row, Col } from "reactstrap";
 
 const Recipe = () => {
     const { id } = useParams();
@@ -36,27 +37,32 @@ const Recipe = () => {
     // console.log(recipe.analyzedInstructions[0].steps);
 
     return (
-        <section>
+        <Container>
             <h1>{recipe.title}</h1>
             <a href={recipe.sourceUrl}>{recipe.sourceName}</a>
             <p>{cleanHTML(recipe.summary)}</p>
             <hr />
-            <h3>Ingredients</h3>
-            <ul>
-                {recipe.extendedIngredients.map( (ing, idx) => (
-                    <li key={idx}>{ing.original}</li>
-                ))}
-            </ul>
-            <hr />
-            <h3>Instructions</h3>
-            <p>{recipe.instructions}</p>
-            <ol>
-                {recipe.analyzedInstructions[0].steps.map(step => (
-                    <li key={step.number}>{step.step}</li>
-                ))}
-            </ol>
+            <Row xs={2}>
+                <Col>
+                    <h3>Ingredients</h3>
+                    <ul>
+                        {recipe.extendedIngredients.map( (ing, idx) => (
+                        <li key={idx}>{ing.original}</li>))}
+                    </ul>
+                </Col>
+                <Col>
+                    <h3>Instructions</h3>
+                    {/* <p>{recipe.instructions}</p> */}
+                    <ol>
+                        {recipe.analyzedInstructions[0].steps.map(step => (
+                            <li key={step.number}>{step.step}</li>
+                        ))}
+                    </ol>
+                </Col>
+
+            </Row>
             <button onClick={save}>Save Recipe</button>
-        </section>
+        </Container>
     )
 
 

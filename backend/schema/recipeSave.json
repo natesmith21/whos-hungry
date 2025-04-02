@@ -11,6 +11,9 @@
       "recipeId": {
         "type": "integer"
       },
+      "recipeTitle": {
+        "type": "string"
+      },
       "recipeFolder": {
         "type": "string",
         "minLength": 1,
@@ -28,6 +31,7 @@
     "additionalProperties": false,
     "required": [
       "username",
-      "recipeId"
+      "recipeId",
+      "recipeTitle"
     ]
   }

@@ -18,15 +18,15 @@ const Login = ( {login} ) => {
       };
 
 
-    //   const submitLogin = async evt => {
-    //     evt.preventDefault();
-    //     let res = await login(formData);
-    //     if (res.success) {
-    //         history.push('/');
-    //     } else {
-    //         console.error(res.errors);
-    //     }
-    //   };
+      const submitLogin = async evt => {
+        evt.preventDefault();
+        let res = await login(formData);
+        if (res.success) {
+            navigate('/');
+        } else {
+            console.error(res.errors);
+        }
+      };
 
     return (
     <section>
