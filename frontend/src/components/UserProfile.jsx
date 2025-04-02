@@ -1,4 +1,5 @@
 import React, {useState, useContext, useEffect} from "react";
+import { Link } from "react-router-dom";
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import UserContext from "../UserContext";
 import dbApi from "../dbApi";
@@ -104,7 +105,7 @@ const UserProfile = () => {
         <h3>Saved Recipes</h3>
         <ul>
             {savedRecipes.map(recipe => (
-                <li key={recipe.recipeId}>{recipe.recipeId}</li>
+                <li key={recipe.recipeId}><Link to={`/recipes/${recipe.recipeId}`}>{recipe.title}</Link></li>
             ))}
          </ul>
     </section>

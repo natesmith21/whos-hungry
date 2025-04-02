@@ -173,6 +173,7 @@ class User {
         const result = await db.query(
             `SELECT username,
                     recipe_id as "recipeId",
+                    recipe_title as "title",
                     recipe_folder as "recipeFolder",
                     made_it as "madeRecipe",
                     rating
@@ -189,7 +190,7 @@ class User {
         return saved_recipes;
     } 
 
-    static async postSavedRecipe({username, recipeId, recipeFolder}){
+    static async postSavedRecipe({username, recipeId, recipeTitle, recipeFolder}){
         const dupeCheck = await db.query(
             `SELECT recipe_id
             FROM saved_recipes
@@ -204,10 +205,10 @@ class User {
 
         let result = await db.query(
             `INSERT INTO saved_recipes
-            (username, recipe_id, recipe_folder)
-            VALUES ($1, $2, $3)
+            (username, recipe_id, recipe_title, recipe_folder)
+            VALUES ($1, $2, $3, $4)
             RETURNING username, recipe_id AS "recipeID"`, 
-            [username,recipeId, recipeFolder]
+            [username,recipeId, recipeTitle, recipeFolder]
         );
 
         const saved = result.rows[0];

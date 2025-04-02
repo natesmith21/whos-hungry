@@ -17,7 +17,7 @@ const RecipeCard = ({ recipe }) => {
         e.preventDefault();
         if (hasSaved(recipe.id)) return;
 
-        addToSaves(recipe.id);
+        addToSaves(recipe.id, recipe.title);
         setSaved(true);
     }
 

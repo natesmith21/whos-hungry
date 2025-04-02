@@ -64,10 +64,10 @@ function App() {
 
   const hasSaved = (id) => savedRecipes.has(id);
 
-  const addToSaves = (id) => {
+  const addToSaves = (id, title) => {
     if (hasSaved(id)) return;
 
-    dbApi.saveRecipe(id, {username: currentUser.username, recipeId: id})
+    dbApi.saveRecipe(id, {username: currentUser.username, recipeId: id, recipeTitle: title})
     setSavedRecipes(new Set([...savedRecipes, id]));
   }
 

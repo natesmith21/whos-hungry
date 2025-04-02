@@ -8,7 +8,7 @@ VALUES ( '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d',
          TRUE
         );
 
-INSERT INTO saved_recipes (username, recipe_id, recipe_folder, made_it, rating)
-VALUES ('testuser', 660185, 'folder1', true, 3),
-        ('testuser', 655822, 'folder1', false, null);
+INSERT INTO saved_recipes (username, recipe_id, recipe_title, recipe_folder, made_it, rating)
+VALUES ('testuser', 660185, 'test1', 'folder1', true, 3),
+        ('testuser', 655822, 'test2', 'folder1', false, null);
 

@@ -14,6 +14,7 @@ CREATE TABLE saved_recipes (
   username VARCHAR(25) 
     REFERENCES users ON DELETE CASCADE,
   recipe_id INTEGER, 
+  recipe_title TEXT NOT NULL,
   recipe_folder TEXT, 
   made_it BOOLEAN NOT NULL DEFAULT FALSE,
   rating INTEGER CHECK (rating > 0 and rating < 6)
