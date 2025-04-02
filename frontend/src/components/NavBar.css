@@ -6,10 +6,11 @@ nav {
   .home{
     font-size: 24px;
     font-weight: 600;
+    color: #bfc2ee;
   }
 
   .home:hover{
-    color: #bfc2ee;
+    color: #f0f2f5;
   }
   
   .nav-item {
@@ -22,12 +23,12 @@ nav {
     text-decoration: none;
   }
   
-  nav a.active {
+  /* nav a.active {
     color: #f0f2f5;
     font-weight: bold;
     border-bottom: 5px dotted;
     box-sizing: border-box;
-  }
+  } */
   
   nav a.active:hover {
     color: #bfc2ee !important;
@@ -44,5 +45,9 @@ nav {
   
   nav a:not(.navbar-brand):hover {
     font-weight: bold;
+  }
+
+  ul li:last-child{
+    margin-left: auto;
   }
   

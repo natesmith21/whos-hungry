@@ -36,7 +36,7 @@ const UserProfile = () => {
       useEffect(() => {
         const getSaved = async () => {
             const userRecipes = await dbApi.getSavedRecipes(currentUser.username);
-            setSavedRecipes(userRecipes);
+            setSavedRecipes(userRecipes.recipesInfo);
             setUserLoaded(true);
         }
         getSaved()

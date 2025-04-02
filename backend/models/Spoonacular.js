@@ -16,7 +16,7 @@ class Spoonacular {
             ? data
             : {};
         
-            console.log(headers)
+            // console.log(headers)
         try {
           return (await axios({ url, method, data, params, headers })).data;
         } catch (err) {
