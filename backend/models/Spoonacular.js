@@ -37,10 +37,11 @@ class Spoonacular {
       }
 
       static async searchRecipes(searchTerms, params) {
+        // console.log(params.offset)
         const filters = [];
-        for (let k in params) filters.push(`${k}=${params.k}`);
+        for (let k in params) filters.push(`${k}=${params[k]}`);
 
-        let res = await this.request(`recipes/complexSearch?query=${searchTerms}`)
+        let res = await this.request(`recipes/complexSearch?query=${searchTerms}&${filters.join('&')}`)
         return res;
       }
 }
