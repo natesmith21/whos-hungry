@@ -16,7 +16,8 @@ const SearchBar = ( { searchFor }) => {
       };
 
       return (
-            <Form className="col-md-8 offset-md-2 searchBar" onSubmit={submitSearch}>
+        <div>
+                      <Form className="col-lg searchBar" onSubmit={submitSearch}>
                 <Label htmlFor="q"/>
                 <Input
                     onChange={handleChange}
@@ -29,6 +30,8 @@ const SearchBar = ( { searchFor }) => {
                 </Input>
                 <Button>Submit</Button>
             </Form>
+        </div>
+
       )
 
 }

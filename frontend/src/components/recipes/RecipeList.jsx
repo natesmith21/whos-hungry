@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import dbApi from "../../dbApi";
 import SearchBar from "../SearchBar";
 import RecipeCard from "./RecipeCard";
+import UserContext from "../../UserContext";
 
 const RecipesList = () => {
     const location = useLocation();
+    const { currentUser } = useContext(UserContext);
     const [recipes, setRecipes] = useState([]);
 
 
@@ -22,7 +24,13 @@ const RecipesList = () => {
         setRecipes(rec.recipes.results);
     }
 
-    
+    // const save = async (id) => {
+    //     const user = currentUser.username;
+    //     const recipeToSave = id;
+    //     let recipeFolder;
+        
+    //     let recipes = await dbApi.saveRecipe(recipeToSave, {username : user, recipeId : recipeToSave, recipeFolder});
+    // }
 
     if (!recipes) return (
         <section>

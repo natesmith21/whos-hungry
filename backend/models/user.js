@@ -158,7 +158,19 @@ class User {
     /** Recipe Box  */
 
     static async getSavedRecipes(user_id) {
-        let result = await db.query(
+        const list = await db.query(
+            `SELECT recipe_id as "recipeId"
+            FROM saved_recipes
+            WHERE username = $1`,
+            [user_id]);
+        
+        const recipeList= [];
+
+        for (let r of list.rows){
+            recipeList.push(r.recipeId);
+        } 
+
+        const result = await db.query(
             `SELECT username,
                     recipe_id as "recipeId",
                     recipe_folder as "recipeFolder",
@@ -168,9 +180,11 @@ class User {
             WHERE username = $1`, 
             [user_id]);
         
-        if (!result) throw new NotFoundError('No Saved Recipes');
+        if (!list) throw new NotFoundError('No Saved Recipes');
 
-        const saved_recipes = result.rows;
+        const saved_recipes = {recipesList: recipeList,
+                               recipesInfo: result.rows
+                            };
 
         return saved_recipes;
     } 
