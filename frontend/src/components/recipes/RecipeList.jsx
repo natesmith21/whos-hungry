@@ -4,6 +4,8 @@ import dbApi from "../../dbApi";
 import SearchBar from "../SearchBar";
 import RecipeCard from "./RecipeCard";
 import UserContext from "../../UserContext";
+import './recipeList.css';
+import { Container } from "reactstrap";
 
 const RecipesList = () => {
     const location = useLocation();
@@ -39,9 +41,9 @@ const RecipesList = () => {
     return (
         <section>
             <SearchBar searchFor={search} />
-            <div className="col-md-10 offset-md-1" >
+            <Container fluid="md" className="recipe-container">
             {recipes.results.map(r => <RecipeCard key={r.id} recipe={r} />)}
-            </div>
+            </Container>
             {(recipes.totalResults > (recipes.number + recipes.offset)) && <button >Next</button> }
         </section>
     )

@@ -22,7 +22,7 @@ const RecipeCard = ({ recipe }) => {
     }
 
     return (
-        <Card className='RecipeCard'>
+        <Card className='RecipeCard col-md-3'>
             <Link to={`/recipes/${recipe.id}`}>
             <CardBody>
                 <CardTitle>

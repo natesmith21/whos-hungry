@@ -1,6 +1,8 @@
 .searchBar{
     display: flex;
     justify-content: space-between;
+    width: 50em;
+    margin: auto;
 }
 
 .searchBar button {
