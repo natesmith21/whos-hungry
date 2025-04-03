@@ -8,7 +8,7 @@ const API_KEY = 'ad36707e96c94e188eadb6aa2c50d31e';
 class Spoonacular {
 
     static async request(endpoint, data = {}, method = "get") {
-        console.debug("API Call:", endpoint, data, method);
+        console.debug("spoon API Call:", endpoint, data, method);
     
         const url = `${BASE_URL}/${endpoint}`;
         const headers = {"x-api-key" : API_KEY}
@@ -36,12 +36,12 @@ class Spoonacular {
         return res;
       }
 
-      static async searchRecipes(searchTerms, params) {
+      static async searchRecipes(params) {
         // console.log(params.offset)
         const filters = [];
         for (let k in params) filters.push(`${k}=${params[k]}`);
 
-        let res = await this.request(`recipes/complexSearch?query=${searchTerms}&${filters.join('&')}`)
+        let res = await this.request(`recipes/complexSearch?${filters.join('&')}`)
         return res;
       }
 }

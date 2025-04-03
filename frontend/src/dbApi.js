@@ -61,8 +61,8 @@ class dbApi {
         return res.recipe;
       }
 
-      static async searchRecipes(term, data){
-        let res = await this.request(`recipes/search/${encodeURIComponent(term)}`, data);
+      static async searchRecipes(data){
+        let res = await this.request(`recipes/search/`, data);
         return res;
       }
 

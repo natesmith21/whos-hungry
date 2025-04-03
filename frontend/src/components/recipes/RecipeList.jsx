@@ -5,7 +5,8 @@ import SearchBar from "../SearchBar";
 import RecipeCard from "./RecipeCard";
 import UserContext from "../../UserContext";
 import './recipeList.css';
-import { Container } from "reactstrap";
+import { Container, Button } from "reactstrap";
+import { cuiseneTypes } from "../../utils";
 
 const RecipesList = () => {
     const location = useLocation();
@@ -13,7 +14,7 @@ const RecipesList = () => {
     const [recipes, setRecipes] = useState();
     const [term, setTerm] = useState();
 
-    // console.log(setSearchTerm);
+    console.log(recipes);
     // is there a better way to do this search? should I clear location.state once I'm done with it? does it need to be in the dep. array for the useEffect?
     if (location.state) {
         useEffect(() => {
@@ -22,19 +23,27 @@ const RecipesList = () => {
         // window.history.replaceState({}, '');
     }
 
-    const search = async (q, offset=0) => {
-        setTerm(q)
-        let rec = await dbApi.searchRecipes(q, {offset});
+    const search = async (data) => {
+        (data.query) && setTerm(data.query); 
+        let rec = await dbApi.searchRecipes(data);
         setRecipes(rec.recipes);
     }
 
-    // const next = async (q, offset=0) => {
-    //     search(term, recipes.number);
-    // }
+    const next = () => {
+        search(term, {offset: (recipes.number + recipes.offset)});
+    }
+
+    const browseCuisene = evt => {
+        evt.preventDefault();
+        search('', {cuisine: evt.target.id});
+    }
 
     if (!recipes) return (
         <section>
             <SearchBar searchFor={search} />
+            <Container fluid="md">
+                {cuiseneTypes.map(c => <Button key={c} id={c} color="primary" size="sm" outline onClick={browseCuisene}>{c}</Button>)}
+            </Container>
         </section>
     )
 
@@ -44,7 +53,7 @@ const RecipesList = () => {
             <Container fluid="md" className="recipe-container">
             {recipes.results.map(r => <RecipeCard key={r.id} recipe={r} />)}
             </Container>
-            {(recipes.totalResults > (recipes.number + recipes.offset)) && <button >Next</button> }
+            {(recipes.totalResults > (recipes.number + recipes.offset)) && <button onClick={next}>Next</button> }
         </section>
     )
     

@@ -12,7 +12,7 @@ const SearchBar = ( { searchFor }) => {
 
     const submitSearch = evt => {
       evt.preventDefault();
-      searchFor(searchTerm.trim() || undefined);
+      searchFor({query: encodeURIComponent(searchTerm.trim()) || undefined});
     };
 
     return (
