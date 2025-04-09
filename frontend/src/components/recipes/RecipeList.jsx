@@ -36,14 +36,17 @@ const RecipesList = () => {
 
     const browseCuisene = evt => {
         evt.preventDefault();
-        search('', {cuisine: evt.target.id});
+        search({cuisine: evt.target.id});
     }
 
     if (!recipes) return (
         <section>
             <SearchBar searchFor={search} />
-            <Container fluid="md">
-                {cuiseneTypes.map(c => <Button key={c} id={c} color="primary" size="sm" outline onClick={browseCuisene}>{c}</Button>)}
+            <Container fluid="md" className="cuiseneBtnArea">
+                {cuiseneTypes.map((c) => (
+                    <Button key={c} id={c} className="cuiseneBtn" color="primary" size="sm" outline onClick={browseCuisene}>{c}</Button>
+                    ))
+                }
             </Container>
         </section>
     )
