@@ -172,7 +172,7 @@ class User {
 
         const result = await db.query(
             `SELECT username,
-                    recipe_id as "recipeId",
+                    recipe_id as "id",
                     recipe_title as "title",
                     recipe_folder as "recipeFolder",
                     made_it as "madeRecipe",
