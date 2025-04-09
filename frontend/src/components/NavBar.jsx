@@ -1,29 +1,39 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import { NavLink } from "react-router-dom";
-import { Navbar, Nav, NavItem, NavbarBrand } from "reactstrap";
+import { Navbar, Nav, NavItem, NavbarBrand, UncontrolledDropdown, DropdownMenu, DropdownItem, DropdownToggle } from "reactstrap";
 import UserContext from "../UserContext";
 import './NavBar.css';
 
 const NavBar = ( { logout } ) => {
   const { currentUser } = useContext(UserContext);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
+
+
+
     return (
         <>
         <Navbar expand="lg">
           <NavbarBrand className="home" href="/">
             Who's Hungry?
           </NavbarBrand>
-          <Nav className="me-auto" navbar>
+          <Nav>
             {(currentUser) ? (
               <>
               <NavItem>
                 <NavLink to="/recipes">Browse Recipes</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink to="/profile">Profile</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink to="/" onClick={logout}>Logout</NavLink>
-              </NavItem>
+              <UncontrolledDropdown nav inNavbar id="profile">
+              <DropdownToggle nav caret>
+                Profile
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem href="/profile">View Profile</DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={ logout }>Logout</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
               </>
             ) :
             (
@@ -39,3 +49,9 @@ const NavBar = ( { logout } ) => {
 }
 
 export default NavBar;
+
+
+
+{/* <NavItem>
+<NavLink to="/" onClick={logout}>Logout</NavLink>
+</NavItem> */}

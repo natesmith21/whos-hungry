@@ -14,8 +14,8 @@ const RecipesList = () => {
     const [recipes, setRecipes] = useState();
     const [term, setTerm] = useState();
 
-    console.log(recipes);
-    // is there a better way to do this search? should I clear location.state once I'm done with it? does it need to be in the dep. array for the useEffect?
+    // console.log(location.state.results.recipes);
+    // is there a better way to do this search? should I clear location.state once I'm done with it? does it need to be in the dep. array for the useEffect? -- local storage would be better***
     if (location.state) {
         useEffect(() => {
             setRecipes(location.state.results.recipes);
@@ -30,7 +30,8 @@ const RecipesList = () => {
     }
 
     const next = () => {
-        search(term, {offset: (recipes.number + recipes.offset)});
+        search({ query: term,
+            offset: (recipes.number + recipes.offset)});
     }
 
     const browseCuisene = evt => {

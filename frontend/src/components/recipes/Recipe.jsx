@@ -24,7 +24,7 @@ const Recipe = () => {
         const recipeToSave = recipe.id;
         let recipeFolder;
         
-        let recipes = await dbApi.saveRecipe(recipeToSave, {username : user, recipeId : recipeToSave, recipeFolder});
+        let recipes = await dbApi.saveRecipe(recipeToSave, {username : user, recipeId : recipeToSave, recipeTitle: recipe.title, recipeFolder});
         console.log(recipes);
     }
 

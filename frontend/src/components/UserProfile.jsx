@@ -1,9 +1,10 @@
 import React, {useState, useContext, useEffect} from "react";
 import { Link } from "react-router-dom";
-import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import {Form, FormGroup, Label, Input, Button, Container} from 'reactstrap';
 import UserContext from "../UserContext";
 import dbApi from "../dbApi";
 import LoadingPage from '../components/LoadingPage';
+import RecipeCard from "./recipes/RecipeCard";
 
 
 const UserProfile = () => {
@@ -103,11 +104,14 @@ const UserProfile = () => {
             <Button >Update</Button>
         </Form>
         <h3>Saved Recipes</h3>
-        <ul>
+        <Container fluid="md" className="recipe-container">
+            {savedRecipes.map(r => <RecipeCard key={r.id} recipe={r} />)}
+        </Container>
+        {/* <ul>
             {savedRecipes.map(recipe => (
                 <li key={recipe.recipeId}><Link to={`/recipes/${recipe.recipeId}`}>{recipe.title}</Link></li>
             ))}
-         </ul>
+         </ul> */}
     </section>
     )
 }
