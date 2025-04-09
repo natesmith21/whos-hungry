@@ -16,7 +16,7 @@ function App() {
   const [userLoaded, setUserLoaded] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [savedRecipes, setSavedRecipes] = useState();
-
+;
   useEffect(function loadUser() {
 
     async function getCurrentUser() {
