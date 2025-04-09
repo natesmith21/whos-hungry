@@ -1,17 +1,10 @@
-import React, {useState, useContext, useEffect} from "react";
-import { Link } from "react-router-dom";
-import {Form, FormGroup, Label, Input, Button, Container} from 'reactstrap';
-import UserContext from "../UserContext";
-import dbApi from "../dbApi";
-import LoadingPage from '../components/LoadingPage';
-import RecipeCard from "./recipes/RecipeCard";
+import React, {useContext, useState} from "react";
+import {Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import UserContext from "../../UserContext";
 
-
-const UserProfile = () => {
-    const { currentUser, setCurrentUser } = useContext(UserContext);
-    const [savedRecipes, setSavedRecipes] = useState();
-    const [userLoaded, setUserLoaded] = useState();
-
+const UserEditForm = () => {
+    const { currentUser } = useContext(UserContext);
+    
     const START_FORM = {
         username: currentUser.username,
         firstName: currentUser.firstName,
@@ -35,19 +28,8 @@ const UserProfile = () => {
         dbApi.updateCurrentUser(username, data) 
       };
 
-      useEffect(() => {
-        const getSaved = async () => {
-            const userRecipes = await dbApi.getSavedRecipes(currentUser.username);
-            setSavedRecipes(userRecipes.recipesInfo);
-            setUserLoaded(true);
-        }
-        getSaved()
-      }, [currentUser])
-
-      if (!userLoaded) return <LoadingPage />;
-
     return (
-    <section>
+        <>
         <h1>Edit Your Profile</h1>
         <Form onSubmit={submitUpdate}>
             <FormGroup>
@@ -103,17 +85,8 @@ const UserProfile = () => {
             </FormGroup>
             <Button >Update</Button>
         </Form>
-        <h3>Saved Recipes</h3>
-        <Container fluid="md" className="recipe-container">
-            {savedRecipes.map(r => <RecipeCard key={r.id} recipe={r} />)}
-        </Container>
-        {/* <ul>
-            {savedRecipes.map(recipe => (
-                <li key={recipe.recipeId}><Link to={`/recipes/${recipe.recipeId}`}>{recipe.title}</Link></li>
-            ))}
-         </ul> */}
-    </section>
+        </>
     )
 }
 
-export default UserProfile;
+export default UserEditForm;

@@ -14,7 +14,7 @@ const NavBar = ( { logout } ) => {
 
     return (
         <>
-        <Navbar expand="lg">
+        <Navbar expand="lg" className="mainNav">
           <NavbarBrand className="home" href="/">
             Who's Hungry?
           </NavbarBrand>
