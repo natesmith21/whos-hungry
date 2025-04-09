@@ -4,3 +4,13 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+.cuiseneBtnArea {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.cuiseneBtn {
+    margin: 10px;
+}
