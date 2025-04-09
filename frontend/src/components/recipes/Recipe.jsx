@@ -3,30 +3,48 @@ import { useParams } from "react-router-dom";
 import dbApi from "../../dbApi";
 import { cleanHTML } from '../../utils';
 import UserContext from "../../UserContext";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Button } from "reactstrap";
 
 
 const Recipe = () => {
     const { id } = useParams();
     const [recipe, setRecipe] = useState(null);
-    const { currentUser, setCurrentUser } = useContext(UserContext);
+    const [saved, setSaved] = useState(null);
+    const { currentUser, hasSaved, addToSaves, removeFromSaves } = useContext(UserContext);
 
     useEffect(() => {
         async function getRecipe() {
             setRecipe(await dbApi.getRecipe(id));
+            setSaved(hasSaved(id));
         }
         getRecipe()
     }, [id]);
 
-    const save = async (e) => {
+    const handleSave = async (e) => {
         e.preventDefault();
-        const user = currentUser.username;
-        const recipeToSave = recipe.id;
-        let recipeFolder;
-        
-        let recipes = await dbApi.saveRecipe(recipeToSave, {username : user, recipeId : recipeToSave, recipeTitle: recipe.title, recipeFolder});
-        console.log(recipes);
+        if (hasSaved(recipe.id)) return;
+
+        addToSaves(recipe.id, recipe.title);
+        setSaved(true);
     }
+
+    const handleRemove = async (e) => {
+        e.preventDefault();
+        if (!hasSaved(recipe.id)) return;
+
+        removeFromSaves(recipe.id);
+        setSaved(false);
+    }
+
+    // const save = async (e) => {
+    //     e.preventDefault();
+    //     const user = currentUser.username;
+    //     const recipeToSave = recipe.id;
+    //     let recipeFolder;
+        
+    //     let recipes = await dbApi.saveRecipe(recipeToSave, {username : user, recipeId : recipeToSave, recipeTitle: recipe.title, recipeFolder});
+    //     console.log(recipes);
+    // }
 
 
     if (!recipe) return (
@@ -62,7 +80,21 @@ const Recipe = () => {
                 </Col>
 
             </Row>
-            <button onClick={save}>Save Recipe</button>
+            {/* <button onClick={save}>Save Recipe</button> */}
+            {(saved) ?            
+            <Button
+                color='danger'
+                outline 
+                onClick={handleRemove}
+                disabled={!saved}
+            >Remove Recipe</Button> :
+            <Button
+            color='success'
+            outline 
+            onClick={handleSave}
+            disabled={saved}
+        >Save Recipe</Button>
+            }
         </Container>
     )
 

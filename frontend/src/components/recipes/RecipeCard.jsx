@@ -12,7 +12,7 @@ const RecipeCard = ({ recipe }) => {
 
     useEffect(function updateSavedStatus() {
         setSaved(hasSaved(recipe.id));
-      }, [recipe.id, hasSaved]);
+      }, [recipe.id]);
 
     const handleSave = async (e) => {
         e.preventDefault();
