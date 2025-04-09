@@ -1,6 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react';
 import {Card, CardBody, CardTitle, CardText, Button, Container} from 'reactstrap';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import UserContext from '../../UserContext';
 import './recipeCard.css';
 
@@ -8,6 +8,7 @@ import './recipeCard.css';
 const RecipeCard = ({ recipe }) => {
     const {hasSaved, addToSaves, removeFromSaves} = useContext(UserContext);
     const [saved, setSaved] = useState();
+    const navigate = useNavigate()
 
     useEffect(function updateSavedStatus() {
         setSaved(hasSaved(recipe.id));
@@ -32,7 +33,6 @@ const RecipeCard = ({ recipe }) => {
 
     return (
         <Card className='RecipeCard col-md-3'>
-            <Link to={`/recipes/${recipe.id}`}>
             <CardBody>
                 <CardTitle>
                     {recipe.title}
@@ -41,21 +41,26 @@ const RecipeCard = ({ recipe }) => {
                     {recipe.summary}
                 </CardText>
             </CardBody>
-            </Link>
-            <Container>
+            <Container className='button-container' fluid="md">
             <Button
-                color='success'
+                color='primary'
                 outline 
-                onClick={handleSave}
-                disabled={saved}
-            >Save Recipe</Button>
-            {(saved) &&             
+                onClick={() => navigate(`${recipe.id}`)}
+                // disabled={!saved}
+            >Details</Button>
+            {(saved) ?            
             <Button
                 color='danger'
                 outline 
                 onClick={handleRemove}
                 disabled={!saved}
-            >Remove Recipe</Button>
+            >Remove Recipe</Button> :
+            <Button
+            color='success'
+            outline 
+            onClick={handleSave}
+            disabled={saved}
+        >Save Recipe</Button>
             }
             </Container>
         </Card>
