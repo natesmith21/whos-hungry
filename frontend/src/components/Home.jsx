@@ -3,24 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import UserContext from "../UserContext";
 import dbApi from "../dbApi";
 import SearchBar from './SearchBar';
+import { Button } from "reactstrap";
 
 const Home = () => {
     const navigate = useNavigate();
     const { currentUser } = useContext(UserContext);
-    // useEffect(function randomRecipe() {
 
-    //     async function getRandRecipie() {
-    //         try {
-    //             let recipie = await spoonApi.getRandom();
-    //             setRecipe(recipie);
-    //         } catch (e) {
-    //             console.error(e)
-    //         }
-    //     }
-    //     getRandRecipie()
-    // }, []);
-
-    // console.log(recipe);
 
     const search = async (q) => {
         let results = await dbApi.searchRecipes(q);
@@ -39,7 +27,7 @@ const Home = () => {
         <>
             <h1>{(currentUser) ? `Welcome back ${currentUser.firstName}!` : `Who's Hungry?`}</h1>
             <SearchBar searchFor={search} />
-            <button onClick={randRecipe}>Get Random</button>
+            <Button color="success" outline className="randomBtn" onClick={randRecipe}>Get Random</Button>
         </>
     )
 }

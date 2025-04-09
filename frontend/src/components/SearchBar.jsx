@@ -28,7 +28,7 @@ const SearchBar = ( { searchFor }) => {
                   placeholder="search"
               >
               </Input>
-              <Button>Submit</Button>
+              <Button color="primary" outline>Submit</Button>
           </Form>
       </div>
     )
