@@ -214,6 +214,24 @@ class User {
         const saved = result.rows[0];
         return saved;
     }
+
+    static async removeSavedRecipe({username, recipeId}) {
+        let result = await db.query(
+            `DELETE 
+            FROM saved_recipes
+            WHERE username = $1
+            AND 
+            recipe_id = $2
+            returning recipe_id`,
+            [username, recipeId]
+        );
+
+        const recipe = result.rows[0];
+
+        if(!recipe) throw new NotFoundError(`Recipe not previously saved`);
+
+        return recipe;
+    }
 }
 
 module.exports = User;

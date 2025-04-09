@@ -16,7 +16,7 @@ function App() {
   const [userLoaded, setUserLoaded] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [savedRecipes, setSavedRecipes] = useState();
-;
+
   useEffect(function loadUser() {
 
     async function getCurrentUser() {
@@ -27,7 +27,7 @@ function App() {
           let currentUser = await dbApi.getCurrentUser(username);
           setCurrentUser(currentUser);
           const userSaves = await dbApi.getSavedRecipes(currentUser.username);
-          setSavedRecipes(new Set(userSaves.recipesList))
+          setSavedRecipes(userSaves.recipesList)
         } catch (e) {
           console.error('error:', e)
           setCurrentUser(null);
@@ -62,13 +62,18 @@ function App() {
     console.log(token);
   }
 
-  const hasSaved = (id) => savedRecipes.has(id);
+  const hasSaved = (id) => savedRecipes.includes(id);
 
   const addToSaves = (id, title) => {
     if (hasSaved(id)) return;
 
     dbApi.saveRecipe(id, {username: currentUser.username, recipeId: id, recipeTitle: title})
-    setSavedRecipes(new Set([...savedRecipes, id]));
+    setSavedRecipes([...savedRecipes, id]);
+  }
+
+  const removeFromSaves = (id) => {
+    setSavedRecipes(savedRecipes.filter(r => r !== id))
+    dbApi.removeSavedRecipe(currentUser.username, id)
   }
 
   if (!userLoaded) return <LoadingPage />;
@@ -76,7 +81,7 @@ function App() {
   return (
     <div className='App'>
       <BrowserRouter>
-      <UserContext.Provider value = {{ currentUser, setCurrentUser, hasSaved, addToSaves }}>
+      <UserContext.Provider value = {{ currentUser, setCurrentUser, hasSaved, addToSaves, removeFromSaves }}>
         <NavBar logout= { logout }/>
         <main>
           <NavRoutes login={login} register={register} />
