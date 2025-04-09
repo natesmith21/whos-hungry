@@ -77,6 +77,12 @@ class dbApi {
         let res = await this.request(`users/${username}/saved`);
         return res.saved;
       }
+
+      /**remove a recipe from a user's saves */
+      static async removeSavedRecipe(username, recipeId) {
+        let res = await this.request(`users/${username}/${recipeId}`, {}, 'delete');
+        return res;
+      }
 }
 
 export default dbApi;

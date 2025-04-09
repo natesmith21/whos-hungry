@@ -75,7 +75,7 @@ router.delete('/:username', ensureCorrectUserOrAdmin, async (req, res, next) => 
 
 
 /**get a users saved recipes */
-router.get('/:username/saved', async (req, res, next) => {
+router.get('/:username/saved', ensureCorrectUserOrAdmin, async (req, res, next) => {
     try {
         const saved = await User.getSavedRecipes(req.params.username);
         return res.json({ saved });
@@ -83,6 +83,17 @@ router.get('/:username/saved', async (req, res, next) => {
         return next(e);
     }
 })
+
+/**deletes a users saved recipe */
+router.delete('/:username/:recipeId', ensureCorrectUserOrAdmin, async (req, res, next) => {
+    try {
+        const recipe = await User.removeSavedRecipe({username: req.params.username, recipeId: req.params.recipeId});
+        return res.json({removed: recipe.recipe_id}); 
+    } catch (e) {
+        return next(e);
+    }
+
+});
 
 
 
