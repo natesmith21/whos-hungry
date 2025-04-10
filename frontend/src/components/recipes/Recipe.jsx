@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from "react";
 import { useParams } from "react-router-dom";
 import dbApi from "../../dbApi";
-import { cleanHTML } from '../../utils';
+import { cleanHTML } from '../../helper_funcs';
 import UserContext from "../../UserContext";
 import { Container, Row, Col, Button } from "reactstrap";
 

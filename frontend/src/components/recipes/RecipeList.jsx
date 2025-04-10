@@ -6,7 +6,7 @@ import RecipeCard from "./RecipeCard";
 import UserContext from "../../UserContext";
 import './recipeList.css';
 import { Container, Button } from "reactstrap";
-import { cuiseneTypes } from "../../utils";
+import { cuiseneTypes } from "../../helper_funcs";
 
 const RecipesList = () => {
     const location = useLocation();
