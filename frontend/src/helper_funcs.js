@@ -1,6 +1,5 @@
-import React from "react";
-import { stripHtml } from "string-strip-html";
 
+const stripHtml = require('string-strip-html');
 
 // this pacakge + function seems to work well enough for right now, but I wish the summary section looked better. I was fearful of using 'dangerouslySetInnerHTML', because i'm not sure I fully trust all the info from the API
 export const cleanHTML = (dirtyHTML) => {
