@@ -2,8 +2,8 @@
 const axios = require('axios');
 
 
-const BASE_URL = 'https://api.spoonacular.com'
-const API_KEY = 'ad36707e96c94e188eadb6aa2c50d31e';
+const BASE_URL = process.env.BASE_URL;
+const API_KEY = process.env.API_KEY;
 
 class Spoonacular {
 
@@ -15,8 +15,7 @@ class Spoonacular {
         const params = (method === "get")
             ? data
             : {};
-        
-            // console.log(headers)
+
         try {
           return (await axios({ url, method, data, params, headers })).data;
         } catch (err) {

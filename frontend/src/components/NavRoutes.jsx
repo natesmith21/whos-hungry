@@ -20,6 +20,7 @@ const NavRoutes = ( { login, register } ) => {
             <Route path ='/register' element={<Register register={register} />} />
             <Route path ='/profile' element={<UserProfile />}>
                 <Route path = 'saved' element={<UserSaves />} />
+                <Route path ='saved/:id' element={<Recipe />} />
                 <Route path = 'edit' element={<UserEditForm />} />
             </Route>
             <Route path ='/recipes' element={<RecipesList />} />

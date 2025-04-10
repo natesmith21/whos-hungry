@@ -27,7 +27,7 @@ function App() {
           let currentUser = await dbApi.getCurrentUser(username);
           setCurrentUser(currentUser);
           const userSaves = await dbApi.getSavedRecipes(currentUser.username);
-          setSavedRecipes(userSaves.recipesList)
+          setSavedRecipes(new Set(userSaves.recipesList))
         } catch (e) {
           console.error('error:', e)
           setCurrentUser(null);
@@ -35,13 +35,6 @@ function App() {
       }
       setUserLoaded(true);
     }
-
-  //   const getSaved = async () => {
-  //     const userRecipes = await dbApi.getSavedRecipes(currentUser.username);
-  //     setSavedRecipes(userRecipes);
-  //     setUserLoaded(true);
-  // }
-
     setUserLoaded(false);
     getCurrentUser();
   }, [token]);
@@ -62,21 +55,25 @@ function App() {
     console.log(token);
   }
 
-  const hasSaved = (id) => savedRecipes.includes(id);
+  const hasSaved = (id) => savedRecipes.has(id);
 
   const addToSaves = (id, title) => {
     if (hasSaved(id)) return;
 
     dbApi.saveRecipe(id, {username: currentUser.username, recipeId: id, recipeTitle: title})
-    setSavedRecipes([...savedRecipes, id]);
+    setSavedRecipes(new Set([...savedRecipes, id]));
   }
 
   const removeFromSaves = (id) => {
-    setSavedRecipes(savedRecipes.filter(r => r !== id))
+    setSavedRecipes((savedRecipes) => {
+      let savedArr = [...savedRecipes];
+      return savedArr.filter(r => r !== id)
+    })
     dbApi.removeSavedRecipe(currentUser.username, id)
   }
 
   if (!userLoaded) return <LoadingPage />;
+
 
   return (
     <div className='App'>
