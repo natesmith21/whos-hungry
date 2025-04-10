@@ -8,16 +8,16 @@ import { Container, Row, Col, Button } from "reactstrap";
 
 const Recipe = () => {
     const { id } = useParams();
+    const { currentUser, hasSaved, addToSaves, removeFromSaves } = useContext(UserContext);
     const [recipe, setRecipe] = useState(null);
     const [saved, setSaved] = useState(null);
-    const { currentUser, hasSaved, addToSaves, removeFromSaves } = useContext(UserContext);
 
     useEffect(() => {
         async function getRecipe() {
             setRecipe(await dbApi.getRecipe(id));
-            setSaved(hasSaved(id));
         }
         getRecipe()
+        setSaved(hasSaved(+id));
     }, [id]);
 
     const handleSave = async (e) => {

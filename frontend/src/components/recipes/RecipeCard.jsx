@@ -8,7 +8,8 @@ import './recipeCard.css';
 const RecipeCard = ({ recipe }) => {
     const {hasSaved, addToSaves, removeFromSaves} = useContext(UserContext);
     const [saved, setSaved] = useState();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
 
     useEffect(function updateSavedStatus() {
         setSaved(hasSaved(recipe.id));
@@ -37,9 +38,7 @@ const RecipeCard = ({ recipe }) => {
                 <CardTitle>
                     {recipe.title}
                 </CardTitle>
-                <CardText>
-                    {recipe.summary}
-                </CardText>
+                <img src={recipe.image} />
             </CardBody>
             <Container className='button-container' fluid="md">
             <Button
