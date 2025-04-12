@@ -1,13 +1,12 @@
 import axios from "axios";
 
-const API_URL = (process.env.NODE_ENV === 'production') ? process.env.REACT_APP_BASE_URL : 
-process.env.BASE_URL;
+const API_URL = process.env.BASE_URL;
 
 class dbApi {
     static token;
 
     static async request(endpoint, data = {}, method = "get") {
-        console.debug("API Call:", endpoint, data, method);
+        console.debug("API Call fe:", endpoint, data, method);
     
         //there are multiple ways to pass an authorization token, this is how you pass it in the header.
         //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
