@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = process.env.BASE_URL;
+const API_URL = (process.env.NODE_ENV === 'production') ? process.env.BASE_URL: 'http://localhost:1001';
 
 class dbApi {
     static token;
