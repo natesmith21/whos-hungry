@@ -1,6 +1,7 @@
 import axios from "axios";
 
-// const BASE_URL = "http://localhost:3001";
+const API_URL = (process.env.NODE_ENV === 'test') ? process.env.BASE_URL : 
+process.env.REACT_APP_BASE_URL;
 
 class dbApi {
     static token;
