@@ -15,7 +15,7 @@ const recipeRoutes = require('./routes/recipes');
 const app = express();
 
 const corsOptions = {
-  origin: 'https://whos-hungry-frontend.onrender.com/',
+  origin: 'https://whos-hungry-frontend.onrender.com',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
