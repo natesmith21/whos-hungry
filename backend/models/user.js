@@ -20,8 +20,6 @@ class User {
             [username]
         );  
 
-        console.log(result);
-
         const user = result.rows[0];
 
         if (user) {
