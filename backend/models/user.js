@@ -11,6 +11,7 @@ const { sqlForPartialUpdate } = require('../helpers/sql');
 class User {
 
     static async authenticate(username, password) {
+        console.log('hit auth func')
         const result = await db.query(
             `SELECT username, 
             password
