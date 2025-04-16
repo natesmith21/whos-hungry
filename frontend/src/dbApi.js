@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL = (process.env.NODE_ENV === 'production') ? 'https://whos-hungry.onrender.com' : 'http://localhost:1001';
 
-console.log(process.env.BASE_URL);
+// console.log(process.env.BASE_URL);
 
 class dbApi {
     static token;

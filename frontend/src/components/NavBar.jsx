@@ -37,9 +37,14 @@ const NavBar = ( { logout } ) => {
               </>
             ) :
             (
-              <NavItem>
-              <NavLink to="/login">Login</NavLink>
-            </NavItem>
+              <>
+              <NavItem className="unkNav">
+                <NavLink to="/login">Login</NavLink>
+              </NavItem>
+              <NavItem className="unkNav">
+                <NavLink to="/register">Register</NavLink>
+              </NavItem>
+              </>
             ) 
             }
           </Nav>
