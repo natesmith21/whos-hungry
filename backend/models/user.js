@@ -19,9 +19,9 @@ class User {
             WHERE username = $1`,
             [username]
         );  
-
+        console.log(result);
         const user = result.rows[0];
-        console.log('user.authenticate user:',user);
+        // console.log('user.authenticate user:',user);
 
         if (user) {
             const isValid = await bcrypt.compare(password, user.password);
