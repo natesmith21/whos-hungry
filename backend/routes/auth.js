@@ -20,9 +20,9 @@ const { BadRequestError } = require("../expressError");
  */
 
 router.post("/token", async function (req, res, next) {
-  console.log('auth/token', req.headers, req.body)
   try {
     const validator = jsonschema.validate(req.body, userAuthSchema);
+    console.log(validator.valid);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);
       throw new BadRequestError(errs);
