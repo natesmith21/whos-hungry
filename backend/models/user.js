@@ -20,7 +20,7 @@ class User {
         );  
 
         const user = result.rows[0];
-        console.log(user);
+        console.log('db', db);
 
         if (user) {
             const isValid = await bcrypt.compare(password, user.password);
