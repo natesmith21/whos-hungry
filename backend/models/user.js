@@ -11,6 +11,7 @@ const { sqlForPartialUpdate } = require('../helpers/sql');
 class User {
 
     static async authenticate(username, password) {
+        console.log('db', db);
         const result = await db.query(
             `SELECT username, 
             password
@@ -20,7 +21,6 @@ class User {
         );  
 
         const user = result.rows[0];
-        console.log('db', db);
 
         if (user) {
             const isValid = await bcrypt.compare(password, user.password);
