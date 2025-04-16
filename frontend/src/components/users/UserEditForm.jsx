@@ -33,7 +33,7 @@ const UserEditForm = () => {
         <h1>Edit Your Profile</h1>
         <Form onSubmit={submitUpdate}>
             <FormGroup>
-            <Label htmlFor="email">
+            <Label htmlFor="username">
                     Username
                 </Label>
                 <Input
