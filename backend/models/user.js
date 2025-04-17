@@ -19,7 +19,6 @@ class User {
             WHERE username = $1`,
             [username]
         );  
-        console.log(result);
         const user = result.rows[0];
         // console.log('user.authenticate user:',user);
 
