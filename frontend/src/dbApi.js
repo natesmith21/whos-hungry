@@ -1,16 +1,18 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3001";
+const API_URL = (process.env.NODE_ENV === 'production') ? 'https://whos-hungry.onrender.com' : 'http://localhost:1001';
+
+// console.log(process.env.BASE_URL);
 
 class dbApi {
     static token;
 
     static async request(endpoint, data = {}, method = "get") {
-        console.debug("API Call:", endpoint, data, method);
+        console.debug("API Call fe:", API_URL, endpoint, data, method);
     
         //there are multiple ways to pass an authorization token, this is how you pass it in the header.
         //this has been provided to show you another way to pass the token. you are only expected to read this code for this project.
-        const url = `${BASE_URL}/${endpoint}`;
+        const url = `${API_URL}/${endpoint}`;
         const headers = { Authorization: `Bearer ${dbApi.token}` };
         const params = (method === "get")
             ? data
