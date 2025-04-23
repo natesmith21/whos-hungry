@@ -8,7 +8,7 @@ const API_KEY = process.env.API_KEY;
 class Spoonacular {
 
     static async request(endpoint, data = {}, method = "get") {
-        console.debug("spoon API Call:", endpoint, data, method);
+        // console.debug("spoon API Call:", endpoint, data, method);
     
         const url = `${BASE_URL}/${endpoint}`;
         const headers = {"x-api-key" : API_KEY}
@@ -36,7 +36,6 @@ class Spoonacular {
       }
 
       static async searchRecipes(params) {
-        // console.log(params.offset)
         const filters = [];
         for (let k in params) filters.push(`${k}=${params[k]}`);
 

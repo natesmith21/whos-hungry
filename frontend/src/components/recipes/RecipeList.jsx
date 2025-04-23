@@ -14,7 +14,6 @@ const RecipesList = () => {
     const [recipes, setRecipes] = useState();
     const [term, setTerm] = useState();
 
-    // console.log(location.state.results.recipes);
     // is there a better way to do this search? should I clear location.state once I'm done with it? does it need to be in the dep. array for the useEffect? -- local storage would be better***
     if (location.state) {
         useEffect(() => {
