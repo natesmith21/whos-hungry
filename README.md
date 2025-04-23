@@ -63,13 +63,13 @@ Currently the App has several simple features:
 * Create a User Account to save recipes 
 * Browse Recipes by cuisine-type 
 
-I would love to continue to work on this project in my spare time. Future features I'd like to build include: 
+I would love to continue to work on this project in my spare time. You will see in my DB schema files, that I have already created fields in DB to enact some further features to allow users to rate and track if they have made recipies. Other future features I'd like to build include: 
 
 * Connect users as 'friends' 
 * Allow user uploads 
 * more robust browse/filter/sort features
 * Comments on recipes
-* I am curious if I could use regex to help me work with the information coming from API and improve some UI
+* I am curious if I could use regex to help me work with the information coming from API and improve some UI 
 
 
 <!-- Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`, `project_license` -->
