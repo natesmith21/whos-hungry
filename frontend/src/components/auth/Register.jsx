@@ -34,7 +34,7 @@ const Register = ( {register } ) => {
         <h1>Register</h1>
         <Form onSubmit={submitLogin}>
             <FormGroup>
-            <Label htmlFor="email">
+            <Label htmlFor="username">
                     Username
                 </Label>
                 <Input
