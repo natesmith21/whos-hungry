@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import { useNavigate } from "react-router-dom";
 
 const Register = ( {register } ) => {
     const BLANK_FORM = {
@@ -10,6 +11,7 @@ const Register = ( {register } ) => {
         email: ""
     }
     const [formData, setFormData] = useState(BLANK_FORM);
+    const navigate = useNavigate();
 
     const handleChange = evt => {
         const { name, value } = evt.target;
@@ -24,6 +26,7 @@ const Register = ( {register } ) => {
         evt.preventDefault();
         register(formData)
         setFormData(BLANK_FORM);
+        navigate('/');
       };
 
     return (
