@@ -4,6 +4,7 @@ import dbApi from "../../dbApi";
 import { cleanHTML } from '../../helper_funcs';
 import UserContext from "../../UserContext";
 import { Container, Row, Col, Button } from "reactstrap";
+import SignInModal from "../users/SignInModal";
 
 
 const Recipe = () => {
@@ -11,14 +12,27 @@ const Recipe = () => {
     const { currentUser, hasSaved, addToSaves, removeFromSaves } = useContext(UserContext);
     const [recipe, setRecipe] = useState(null);
     const [saved, setSaved] = useState(null);
+    const [modal, setModal] = useState(false);
 
-    useEffect(() => {
-        async function getRecipe() {
-            setRecipe(await dbApi.getRecipe(id));
-        }
-        getRecipe()
-        setSaved(hasSaved(+id));
-    }, [id]);
+    const toggle = () => setModal(!modal);
+
+    if (currentUser) {
+        useEffect(() => {
+            async function getRecipe() {
+                setRecipe(await dbApi.getRecipe(id));
+            }
+            getRecipe()
+            setSaved(hasSaved(+id));
+        }, [id]);
+    
+    } else {
+        useEffect(() => {
+            async function getRecipe() {
+                setRecipe(await dbApi.getRecipe(id));
+            }
+            getRecipe()
+        }, [id]);
+    }
 
     const handleSave = async (e) => {
         e.preventDefault();
@@ -34,6 +48,12 @@ const Recipe = () => {
 
         removeFromSaves(recipe.id);
         setSaved(false);
+
+    }
+
+    const showPopUp = async (e) => {
+        e.preventDefault();
+        toggle()
     }
 
 
@@ -59,7 +79,6 @@ const Recipe = () => {
                 </Col>
                 <Col>
                     <h3>Instructions</h3>
-                    {/* <p>{recipe.instructions}</p> */}
                     <ol>
                         {recipe.analyzedInstructions[0].steps.map(step => (
                             <li key={step.number}>{step.step}</li>
@@ -68,21 +87,22 @@ const Recipe = () => {
                 </Col>
 
             </Row>
-            {/* <button onClick={save}>Save Recipe</button> */}
             {(saved) ?            
             <Button
                 color='danger'
                 outline 
-                onClick={handleRemove}
+                onClick={(currentUser) ? handleRemove : showPopUp}
                 disabled={!saved}
             >Remove Recipe</Button> :
             <Button
             color='success'
             outline 
-            onClick={handleSave}
+            onClick={(currentUser) ? handleSave : showPopUp}
             disabled={saved}
         >Save Recipe</Button>
             }
+        
+        <SignInModal modal={modal} toggle={toggle} />
         </Container>
     )
 
