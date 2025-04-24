@@ -15,7 +15,7 @@ function App() {
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE);
   const [userLoaded, setUserLoaded] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [savedRecipes, setSavedRecipes] = useState();
+  const [savedRecipes, setSavedRecipes] = useState(new Set());
 
   useEffect(function loadUser() {
 
