@@ -52,7 +52,8 @@ function App() {
   }
   const register = async (data) => {
     const token = await dbApi.makeUser(data);
-    console.log(token);
+    setToken(token);
+    return {success: true};
   }
 
   const hasSaved = (id) => savedRecipes.has(id);
