@@ -80,10 +80,49 @@ I would love to continue to work on this project in my spare time. You will see 
 
 ### Built With
 
+* [[[Node.js]][Nodejs-url]
 * [![Express][Express.js]][Express-url]
 * [![React][React.js]][React-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![Spoonacular-API][Spoonacular.com]][Spoonacular-url]
+* [[Bootstrap.com]][Bootstrap-url]
+* [[Spoonacular.com]][Spoonacular-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Instructions
+
+1. Clone the Repository: 
+   1. step 1
+
+
+2. Set-up backend
+   1. enter the folder: `cd backend`
+   2. intall the dependencies: `npm -i`
+   3. set up .env 
+      1. To set up your project, you will need to visit [Spoonacular][Spoonacular-url] and follw the signup instructions to get your API key 
+        ```
+          NODE_ENV=test
+          SECRET_KEY=[your_secret_key]
+
+          BASE_URL='https://api.spoonacular.com'
+          API_KEY=[your_api_key] 
+        ```
+   4. start the server: npm run dev
+
+
+3. Seed the database
+   1. use can use the included whos_hungry.sql file `psql -i whos_hungry.sql`
+
+
+4. Tests included in backend can be run with: `npm test`
+
+
+5. Set-up frontend
+   1. enter the folder: `cd ../frontend`
+   2. install the dependencies: `npm -i`
+   3. start the front end: `npm run dev`
+
+
+6. visit the page at http://localhost:5173
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -115,3 +154,4 @@ Project Link: [https://github.com/natesmith21/whos-hungry](https://github.com/na
 [Bootstrap-url]: https://getbootstrap.com
 [Express-url]: https://expressjs.com
 [Spoonacular-url]: https://spoonacular.com/
+[Nodejs-url]: https://nodejs.org/en
