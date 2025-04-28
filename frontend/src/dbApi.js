@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = (import.meta.env.DEV === true) ? 'http://localhost:1001' : process.node.env.BASE_URL;
+const API_URL = (import.meta.env.DEV === true) ? 'http://localhost:1001' : import.meta.env.VITE_BASE_URL;
 
 class dbApi {
     static token;
