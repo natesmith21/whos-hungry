@@ -96,7 +96,7 @@ I would love to continue to work on this project in my spare time. You will see 
 
 2. Set-up backend
    1. enter the folder: `cd backend`
-   2. intall the dependencies: `npm -i`
+   2. install the dependencies: `npm -i`
    3. set up .env 
       1. To set up your project, you will need to visit [Spoonacular][Spoonacular-url] and follw the signup instructions to get your API key 
         ```
