@@ -80,18 +80,18 @@ I would love to continue to work on this project in my spare time. You will see 
 
 ### Built With
 
-* [[[Node.js]][Nodejs-url]
-* [![Express][Express.js]][Express-url]
-* [![React][React.js]][React-url]
-* [[Bootstrap.com]][Bootstrap-url]
-* [[Spoonacular.com]][Spoonacular-url]
+* [Node.js][Nodejs-url]
+* [Express.js][Express-url]
+* [React.js][React-url]
+* [Bootstrap.com][Bootstrap-url]
+* [Spoonacular.com][Spoonacular-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Instructions
 
 1. Clone the Repository: 
-   1. step 1
+   1. follow the instructions to cloneing a repository [here][https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository]
 
 
 2. Set-up backend
