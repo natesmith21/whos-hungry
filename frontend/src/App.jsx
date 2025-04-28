@@ -15,7 +15,7 @@ function App() {
   const [token, setToken] = useLocalStorage(TOKEN_STORAGE);
   const [userLoaded, setUserLoaded] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [savedRecipes, setSavedRecipes] = useState();
+  const [savedRecipes, setSavedRecipes] = useState(new Set());
 
   useEffect(function loadUser() {
 
@@ -24,9 +24,9 @@ function App() {
         try {
           let { username } = jwtDecode(token);
           dbApi.token = token;
-          let currentUser = await dbApi.getCurrentUser(username);
-          setCurrentUser(currentUser);
-          const userSaves = await dbApi.getSavedRecipes(currentUser.username);
+          let getUser = await dbApi.getCurrentUser(username);
+          setCurrentUser(getUser);
+          const userSaves = await dbApi.getSavedRecipes(getUser.username);
           setSavedRecipes(new Set(userSaves.recipesList))
         } catch (e) {
           console.error('error:', e)
