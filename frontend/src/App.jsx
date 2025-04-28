@@ -24,9 +24,9 @@ function App() {
         try {
           let { username } = jwtDecode(token);
           dbApi.token = token;
-          let currentUser = await dbApi.getCurrentUser(username);
-          setCurrentUser(currentUser);
-          const userSaves = await dbApi.getSavedRecipes(currentUser.username);
+          let getUser = await dbApi.getCurrentUser(username);
+          setCurrentUser(getUser);
+          const userSaves = await dbApi.getSavedRecipes(getUser.username);
           setSavedRecipes(new Set(userSaves.recipesList))
         } catch (e) {
           console.error('error:', e)

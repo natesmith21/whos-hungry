@@ -25,6 +25,7 @@ const Login = ( {login} ) => {
             navigate('/');
         } else {
             console.error(res.errors);
+            return <Error error={res.errors}/>
         }
       };
 
