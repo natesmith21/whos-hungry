@@ -91,7 +91,7 @@ I would love to continue to work on this project in my spare time. You will see 
 ### Instructions
 
 1. Clone the Repository: 
-   1. follow the instructions to cloneing a repository [here][https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository]
+   1. follow the instructions to cloneing a repository [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 
 
 2. Set-up backend
