@@ -25,7 +25,7 @@
 <h3 align="center">Who's Hungry?</h3>
 
   <p align="center">
-    A Small app to find and save recipes to make at home. Stay tuned for future enhancements.
+    An app to find and save recipes to make at home. Stay tuned for future enhancements.
     <br />
     <a href="https://github.com/natesmith21/whos-hungry"><strong>Explore the docs »</strong></a>
     <br />
@@ -69,7 +69,6 @@ I would love to continue to work on this project in my spare time. You will see 
 * Allow user uploads 
 * more robust browse/filter/sort features
 * Comments on recipes
-* I am curious if I could use regex to help me work with the information coming from API and improve some UI 
 
 
 <!-- Here's a blank template to get started. To avoid retyping too much info, do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`, `project_license` -->
@@ -83,6 +82,7 @@ I would love to continue to work on this project in my spare time. You will see 
 * [Node.js][Nodejs-url]
 * [Express.js][Express-url]
 * [React.js][React-url]
+* [PostgreSQL] [Psql-url]
 * [Bootstrap.com][Bootstrap-url]
 * [Spoonacular.com][Spoonacular-url]
 
@@ -141,9 +141,9 @@ Project Link: [https://github.com/natesmith21/whos-hungry](https://github.com/na
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[forks-shield]: https://img.shields.io/github/forks/natesmith21[/whos-hungry.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/natesmith21/whos-hungry.svg?style=for-the-badge
 [forks-url]: https://github.com/natesmith21/whos-hungry/network/members
-[stars-shield]: https://img.shields.io/github/stars/natesmith21[/whos-hungry.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/natesmith21/whos-hungry.svg?style=for-the-badge
 [stars-url]: https://github.com/natesmith21/whos-hungry/stargazers
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/nathan-smith-08a805a4
@@ -155,3 +155,5 @@ Project Link: [https://github.com/natesmith21/whos-hungry](https://github.com/na
 [Express-url]: https://expressjs.com
 [Spoonacular-url]: https://spoonacular.com/
 [Nodejs-url]: https://nodejs.org/en
+[PostgreSQL]:https://img.shields.io/badge/PostgreSQL?style=for-the-badge
+[Psql-url]: https://postgresql.org
